@@ -112,10 +112,10 @@ class XboxController(object):
             print("[!] Error: No controller found.  Exiting.")
             exit(1)
         while True:
-            events = get_gamepad()
-            for event in events:
-                if event.state:
-                    play_sound_for_button(event.code)
+            # get_gamepad() returns list of 1 input event
+            event = get_gamepad()[0]
+            if event.state:
+                play_sound_for_button(event.code)
 
     def _monitor_controller_debug(self):
         while True:
@@ -177,7 +177,8 @@ def play_sound_for_button(code):
 
 def main():
     pygame.mixer.init()
-    joy = XboxController()
+    #joy = XboxController()
+    XboxController()
     master = Tk()
 
     menu_button_map = {}
